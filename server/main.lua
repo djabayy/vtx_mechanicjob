@@ -241,23 +241,6 @@ AddEventHandler('esx_mechanicjob:stopCraft3', function()
 	PlayersCrafting3[_source] = false
 end)
 
-RegisterServerEvent('esx_mechanicjob:onNPCJobMissionCompleted')
-AddEventHandler('esx_mechanicjob:onNPCJobMissionCompleted', function()
-	local _source = source
-	local xPlayer = ESX.GetPlayerFromId(_source)
-	local total   = math.random(Config.NPCJobEarnings.min, Config.NPCJobEarnings.max);
-
-	if xPlayer.job.grade >= 3 then
-		total = total * 2
-	end
-
-	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
-		account.addMoney(total)
-	end)
-
-	TriggerClientEvent("esx:showNotification", _source, _U('your_comp_earned').. total)
-end)
-
 ESX.RegisterUsableItem('blowpipe', function(source)
 	local _source = source
 	local xPlayer  = ESX.GetPlayerFromId(source)
